@@ -72,6 +72,7 @@ Running 30s test @ http://localhost/public/index.html
     Latency    11.69ms    6.90ms 190.44ms   86.08%
     Req/Sec     2.92k   486.64    14.87k    78.13%
   1047929 requests in 30.10s, 394.71MB read
+  
 Requests/sec:  34815.32
 Transfer/sec:     13.11MB
 ```
@@ -104,10 +105,56 @@ Transfer/sec:      1.32MB
 
 # Лабораторная работа 3
 
+## Домашнее задание №3
+
+1. Создать и запустить Django-проект — 2 балла;
+2. Реализовать «заглушки» для всех методов API, используя
+JsonResponse — 3 баллов:
+a. Профиль;
+b. Список продуктов;
+c. Страница категории;
+d. и т.д.
+3. В конфиге nginx создать location, которые будет ходить на Djangoприложение — 3 балла;
+4. Обрабатывать только нужные методы (GET/POST) — 2 балла.
+
+```
+cd /home/natali/git/2022-MAI-Backend-N-Kusova/labs/
+Django-admin startproject project
+cd ./project
+python manage.py migrate
+./manage.py startapp shop
+
+python manage.py runserver
+```
+
+показать 
+- views.py
+- settings.py
+- urls.py
+- my_domain (location на Django приложение)
+
+Обрабатывать только нужные методы: views.py - @require_http_methods(["GET", "POST"])
 
 # Лабораторная работа 4
+
+## Домашнее задание №4
+
 # Лабораторная работа 5
+
+## Домашнее задание №5
+
 # Лабораторная работа 6
+
+## Домашнее задание №6
+
 # Лабораторная работа 7
+
+## Домашнее задание №7
+
 # Лабораторная работа 8
+
+## Домашнее задание №8
+
 # Лабораторная работа 9
+
+## Домашнее задание №9
