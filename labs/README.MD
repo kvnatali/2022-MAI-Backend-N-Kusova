@@ -149,10 +149,62 @@ python manage.py runserver
 # Лабораторная работа 4
 
 ## Домашнее задание №4
-## Установить Postgres, создать нового пользователя и БД и настроить доступ — 5 баллов;
-## Спроектировать базу данных проекта, подготовить модели и мигрировать их в БД — 5 баллов;
+- Установить Postgres, создать нового пользователя и БД и настроить доступ — 5 баллов;
+- Спроектировать базу данных проекта, подготовить модели и мигрировать их в БД — 5 баллов;
 * должна присутствовать как минимум одна из связей OneToOne, ForeignKey, ManyToMany)
+
 ### Шаги реализации
+
+Установку на ubuntu см тут https://www.postgresql.org/download/linux/ubuntu/
+```
+sudo systemctl start postgresql@12-main
+
+sudo -u postgres psql
+
+ALTER USER postgres PASSWORD '1qaz@WSX';
+CREATE SCHEMA study;
+CREATE USER user1 PASSWORD '1qaz@WSX';
+GRANT ALL ON SCHEMA study TO user1;
+\q
+
+sudo adduser user1
+
+su - user1
+psql -d postgres
+
+//CREATE TABLE study.test (coltest varchar(20));
+
+CREATE DATABASE study OWNER user1;
+
+psql --host=localhost --user=user1 study
+
+```
+
+```
+./manage.py migrate
+./manage.py  createsuperuser
+./manage.py runserver
+```
+### Проверка что БД и пользователь созданы
+
+study=> \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ study     | user1    | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+### показать 
+
+psql --host=localhost --user=user1 study
+\l
+
+- settings.py (секция DATABASES)
 
 
 # Лабораторная работа 5
