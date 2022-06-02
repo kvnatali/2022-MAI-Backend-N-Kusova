@@ -14,7 +14,7 @@ server {
 
 
 	location /public/ {
-		root /home/natali/git/2022-MAI-Backend-N-Kusova/labs/data/;
+		alias /home/natali/git/2022-MAI-Backend-N-Kusova/labs/data/;
 	}
 
 
@@ -30,4 +30,11 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
+	location /api/ {
+		proxy_pass http://localhost:8000;
+	}
+
+	location /web/ {
+		proxy_pass http://localhost:8000;
+	}
 }

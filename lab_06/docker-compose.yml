@@ -1,0 +1,65 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres:latest
+    
+    restart: always
+    
+    environment:
+      POSTGRES_DB: "django_db"
+      POSTGRES_USER: "django_user"
+      POSTGRES_PASSWORD: "password"
+    
+    volumes:
+      - .:/docker-entrypoint-initdb.d
+    
+    ports:
+      - "5432:5432"
+    
+    networks:
+      - app-network
+    
+
+  nginx:
+    
+    image: nginx:latest
+    
+    container_name: nginx
+    
+    
+    restart: always
+    
+    volumes:
+      - ./nginx/static:/home/static
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
+    ports:
+      - "80:80" 
+    
+    networks:
+      - app-network
+
+  django_app:
+    
+    build:
+      context: django_app
+      dockerfile: Dockerfile
+    
+    container_name: django_app
+    restart: always
+
+    ports:
+      - "8000:8000" 
+
+    networks:
+      - app-network
+    
+    depends_on:
+      - postgres
+    
+    command: sh -c "python3 project/manage.py makemigrations && python3 project/manage.py migrate && python3 project/manage.py shell < project/init_db.py && python3 project/manage.py runserver 0.0.0.0:8000"
+
+networks:
+  app-network:
+    driver: "bridge"
