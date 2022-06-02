@@ -208,10 +208,6 @@ psql --host=localhost --user=user1 study
 - папка migrations
 - models.py
 
-Админка:
-http://localhost:8000/admin/
-user1 1qaz@WSX
-
 # Лабораторная работа 5
 
 ## Домашнее задание №5
@@ -223,10 +219,31 @@ c. Получения списка чатов
 
 ### Шаги реализации
 
+Установлена админка
+Админка:
+http://localhost:8000/admin/
+user1 1qaz@WSX
+
+Добавлены методы см. postman и views.py
+
 # Лабораторная работа 6
 
 ## Домашнее задание №6
+
+1. Установить docker и docker-compose (1 балл);
+2. Создание Dockerfile для Django приложения (2 балла);
+3. Создание docker-compose для проекта:
+a. nginx (3 балла),
+b. База данных (3 балла),
+4. Создание Makefile для проекта (1 балл);
+
+
 ### Шаги реализации
+
+sudo systemctl stop postgresql@12-main
+sudo service postgresql stop
+sudo systemctl stop nginx
+
 
 # Лабораторная работа 7
 
