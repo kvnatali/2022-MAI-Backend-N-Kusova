@@ -3,6 +3,8 @@ version: "3.3"
 services:
   postgres:
     image: postgres:latest
+
+    container_name: postgres
     
     restart: always
     
@@ -10,6 +12,7 @@ services:
       POSTGRES_DB: "django_db"
       POSTGRES_USER: "django_user"
       POSTGRES_PASSWORD: "password"
+      #POSTGRES_HOST_AUTH_METHOD: trust
     
     volumes:
       - .:/docker-entrypoint-initdb.d
@@ -58,8 +61,14 @@ services:
     depends_on:
       - postgres
     
-    command: sh -c "python3 project/manage.py makemigrations && python3 project/manage.py migrate && python3 project/manage.py shell < project/init_db.py && python3 project/manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python3 project/manage.py makemigrations &&
+                    python3 project/manage.py migrate &&
+                    python3 project/manage.py shell < python3 project/manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  pgdata:
 
 networks:
   app-network:
     driver: "bridge"
+    external: false
