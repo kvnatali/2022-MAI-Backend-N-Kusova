@@ -248,8 +248,44 @@ sudo systemctl stop nginx
 # Лабораторная работа 7
 
 ## Домашнее задание №7
-### Шаги реализации
 
+● Добавить в проект djangorestframework;
+● Переписать заглушки всех предыдущих методов;
+● Написать один или несколько форм для валидации форм.
+
+### Шаги для запуска окружения и проверки
+```
+source ~/venv/bin/activate
+
+pip install djangorestframework
+
+pip freeze > requirements.txt
+
+sudo systemctl start postgresql 
+
+sudo -u postgres psql
+
+ cd ~/git/2022-MAI-Backend-N-Kusova/lab_07/project/
+
+python manage.py runserver
+
+sudo systemctl start nginx
+
+```
+
+### Ссылки для веб-интерфейса
+```
+http://localhost:8000/ стартовая страница
+http://localhost:8000/admin админка (username: user1, password: 1qaz@WSX)
+```
+
+### Ссылки для api
+```
+http://127.0.0.1:8000/api/category/ вернуть список всех категорий
+http://127.0.0.1:8000/api/profile/1 вернуть пользователя с id = 1
+http://127.0.0.1:8000/api/category/ добавить категорию
+ - В параметрах передать title
+```
 # Лабораторная работа 8
 
 ## Домашнее задание №8
